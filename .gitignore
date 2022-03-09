@@ -1,0 +1,7 @@
+node_modules
+sogei
+merged/*
+iOS/*
+android/*
+dist
+.DS_Store
