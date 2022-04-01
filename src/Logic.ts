@@ -4,8 +4,6 @@ export type CSVAndroidRow = {
 	base: string,
 	rafforzata: string,
 	visitatoriRSA: string,
-	studenti: string,
-	lavoro: string,
 	ingressoIT: string
 };
 
@@ -13,8 +11,6 @@ export type CSViOSRow = CSVAndroidRow & {
 	exBase: string,
 	exRafforzata: string,
 	exVisitatoriRSA: string,
-	exStudenti: string,
-	exLavoro: string,
 	exIngressoIT: string
 }
 
@@ -34,9 +30,7 @@ export function getRows(csv: string, rowSeparator: string = '\n', columnSeparato
 				base: columns[1],
 				rafforzata: columns[2],
 				visitatoriRSA: columns[3],
-				studenti: columns[4],
-				lavoro: columns[5],
-				ingressoIT: columns[6]
+				ingressoIT: columns[4]
 			} as CSVAndroidRow;
 		else
 			return {
@@ -47,12 +41,8 @@ export function getRows(csv: string, rowSeparator: string = '\n', columnSeparato
 				exRafforzata: columns[4],
 				visitatoriRSA: columns[5],
 				exVisitatoriRSA: columns[6],
-				studenti: columns[7],
-				exStudenti: columns[8],
-				lavoro: columns[9],
-				exLavoro: columns[10],
-				ingressoIT: columns[11],
-				exIngressoIT: columns[12],
+				ingressoIT: columns[7],
+				exIngressoIT: columns[8],
 			} as CSViOSRow;
 	});
 }
@@ -63,7 +53,7 @@ export function mergeCSVs(iOS: Array<CSViOSRow>, android: Array<CSVAndroidRow>):
 		process.exit();
 	}
 
-	let mergedCSVs: string = 'ID;[iOS] Base;[Android] Base;[iOS] Rafforzata;[Android] Rafforzata;[iOS] Visitatori RSA;[Android] Visitatori RSA;[iOS] Studenti;[Android] Studenti;[iOS] Lavoro;[Android] Lavoro;[iOS] Ingresso in Italia;[Android] Ingresso in Italia;SOGEI - iOS;SOGEI - Android;iOS - Android;\n';
+	let mergedCSVs: string = 'ID;[iOS] Base;[Android] Base;[iOS] Rafforzata;[Android] Rafforzata;[iOS] Visitatori RSA;[Android] Visitatori RSA;[iOS] Ingresso in Italia;[Android] Ingresso in Italia;SOGEI - iOS;SOGEI - Android;iOS - Android;\n';
 
 	const iOSModes: Array<string> 			= Object.keys(iOS[0]).filter(m => m !== 'id');
 	const androidModes: Array<string> 		= Object.keys(android[0]).filter(m => m !== 'id');
