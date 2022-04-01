@@ -63,7 +63,7 @@ export function mergeCSVs(iOS: Array<CSViOSRow>, android: Array<CSVAndroidRow>):
 		process.exit();
 	}
 
-	let mergedCSVs: string = 'ID;[iOS] Base;[Android] Base;[iOS] Rafforzata;[Android] Rafforzata;[iOS] Visitatori RSA;[Android] Visitatori RSA;[iOS] Studenti;[Android] Studenti;[iOS] Lavoro;[Android] Lavoro;[iOS] Ingresso in Italia;[Android] Ingresso in Italia;SOGEI - iOS;SOGEI - Android;iOS - Android;\n';
+	let mergedCSVs: string = 'ID;[iOS] Base;[Android] Base;[iOS] Rafforzata;[Android] Rafforzata;[iOS] Visitatori RSA;[Android] Visitatori RSA;[iOS] Ingresso in Italia;[Android] Ingresso in Italia;SOGEI - iOS;SOGEI - Android;iOS - Android;\n';
 
 	const iOSModes: Array<string> 			= Object.keys(iOS[0]).filter(m => m !== 'id');
 	const androidModes: Array<string> 		= Object.keys(android[0]).filter(m => m !== 'id');
@@ -76,6 +76,9 @@ export function mergeCSVs(iOS: Array<CSViOSRow>, android: Array<CSVAndroidRow>):
 		let strRow = `${iOS[i].id};`;
 		
 		androidModes.forEach((mode, index) => {
+			if (mode === 'lavoro' || mode === 'studenti')
+				return;
+				
 			const iOSResult: string = iOS[i][mode];
 			const androidResult: string = mapAndroidResult(android[i][mode]);
 
